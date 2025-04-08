@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--数据源-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <!--设置驱动名-->
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>-->
+
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"></property>
+        <!--设置连接数据库的url-->
+       <!-- <property name="url" value="jdbc:mysql://localhost:3306/db_jdbc"></property>-->
+        <!--设置用户名-->
+        <property name="username" value="system"></property>
+        <!--设置密码-->
+        <property name="password" value="123456"></property>
+    </bean>
+    <!--jdbcTemplate: 提供数据库的增删改查-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!--studentDao-->
+    <bean id="studentDao" class="com.example.dao.impl.StudentDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+</beans>

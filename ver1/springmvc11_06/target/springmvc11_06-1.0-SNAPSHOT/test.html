@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body>
+  <h2>测试</h2>
+
+<!--请求：
+  get:
+    /test/get?id=100
+    /test/get?id=100&name=zs
+  post:
+    请求中如果携带参数，参数不会拼接到url之后，而是封装到请求体中
+    所以一般在进行表单提交的时候，会选择该种方式
+-->
+    <a href="/test/get?id=100">get请求</a><br>
+    <a href="/test/get2?id=100&name=zs">带多个参数的get请求</a><br>
+    <hr>
+    <form action="/test/post" method="post">
+        name: <input type="text" name="name"><br>
+        pwd: <input type="password" name="pwd"><br>
+        <input type="submit">
+    </form>
+</body>
+</html>

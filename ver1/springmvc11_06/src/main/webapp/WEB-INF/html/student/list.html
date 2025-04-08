@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>学生列表信息</title>
+</head>
+<body>
+    <h1>学生列表信息</h1>
+    <div>
+      <a href="/student/addInput">添加学生</a>
+    </div>
+    <table>
+      <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>操作</th>
+      </tr>
+      <!--stu:所遍历的集合中元素的变量名
+        students:后端存放在model对象中的参数名
+      -->
+      <tr th:each="stu:${students}">
+        <td th:text="${stu.no}">1112001</td>
+        <td th:text="${stu.name}">小张</td>
+        <td th:text="${stu.age}">20</td>
+        <td>
+  <a th:href="@{'/student/edit/{no}'(no=${stu.no}, page=${currentPage})}">更新</a>
+  &nbsp;&nbsp;&nbsp;
+  <a th:href="@{'/student/delete/{no}'(no=${stu.no}, page=${currentPage})}" onclick="return confirm('确认要删除该学生吗？')">删除</a>
+</td>
+      </tr>
+    </table>
+
+    <div class="pagination" th:if="${totalPages > 0}">
+        <a th:href="@{/student/list(page=${currentPage - 1})}" th:unless="${currentPage == 1}">« 上一页</a>
+        
+        <span th:each="page : ${#numbers.sequence(1, totalPages)}">
+            <a th:if="${page != currentPage}" th:href="@{/student/list(page=${page})}" th:text="${page}"></a>
+            <strong th:if="${page == currentPage}" th:text="${page}"></strong>
+        </span>
+        
+        <a th:href="@{/student/list(page=${currentPage + 1})}" th:unless="${currentPage == totalPages}">下一页 »</a>
+    </div>
+
+    <style>
+        .pagination {
+            margin-top: 20px;
+        }
+        .pagination a, .pagination strong {
+            padding: 8px 12px;
+            margin: 0 2px;
+            border: 1px solid #ddd;
+            text-decoration: none;
+        }
+        .pagination a:hover {
+            background: #eee;
+        }
+        .pagination strong {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+    </style>
+</body>
+</html>
