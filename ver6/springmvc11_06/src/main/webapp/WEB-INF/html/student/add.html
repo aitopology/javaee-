@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加学生</title>
+    <style>
+      .error {
+        color: #dc3545;
+        font-size: 0.875em;
+        margin-top: 0.25rem;
+      }
+    </style>
+</head>
+<body>
+  <form th:action="@{/student/add}" th:object="${student}" method="post">
+    <div>
+        <label>学号：</label>
+        <input type="text" th:field="*{no}" required>
+        <div th:if="${#fields.hasErrors('no')}" class="error">学号已存在</div>
+    </div>
+    <div>
+        <label>姓名：</label>
+        <input type="text" th:field="*{name}" required>
+    </div>
+    <div>
+        <label>年龄：</label>
+        <input type="number" th:field="*{age}" required>
+    </div>
+    <button type="submit">提交</button>
+</form>
+</body>
+</html>
